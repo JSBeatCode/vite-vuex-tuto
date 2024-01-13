@@ -6,16 +6,19 @@ import HelloWorld from './components/HelloWorld.vue'
   <div>
     <h1>Vite Vue 3 Project with Vuex</h1>
     <TodoList />
+    <TodoListReactiveType />
   </div>
   
 </template>
 
 <script>
 import TodoList from './components/TodoList.vue';
+import TodoListReactiveType from './components/TodoListReactiveType.vue'
 
 export default {
   components: {
     TodoList,
+    TodoListReactiveType
   }
 }
 </script>

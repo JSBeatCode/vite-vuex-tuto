@@ -1,9 +1,9 @@
 <template>
     <div>
-        <h3>--------computed with vuex--------</h3>
+        <h3>--------vuex--------</h3>
         <h2>Todo List</h2>
         <form @submit.prevent="addTodo">
-            <input v-model="newTodo" placeholder="Add a new todo"/>
+            <input v-model="newTodo" placeholder="Add a new todo" />
             <button type="submit">Add</button>
         </form>
         <ul>
@@ -25,7 +25,8 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapGetters } from 'vuex';
+import { mapState, mapActions, mapGetters, useStore } from 'vuex';
+import { computed, ref } from 'vue';
 
 export default {
     computed: {
