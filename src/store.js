@@ -16,6 +16,13 @@ export default createStore({
         },
         removeTodo(state, index) {
             state.todos.splice(index, 1);
+        },
+        changeTodo(state, params) {
+            state.todos.map((one, idx, all) => {
+                if (idx === params.index) {
+                    one.completed = params.completed
+                }
+            })
         }
     },
     /**
@@ -39,6 +46,9 @@ export default createStore({
         // todo를 제거하는 액션
         removeTodo({ commit }, index) {
             commit('removeTodo', index)
+        },
+        changeTodoAsync({ commit }, params) {
+            commit('changeTodo', params)
         }
     },
     /**

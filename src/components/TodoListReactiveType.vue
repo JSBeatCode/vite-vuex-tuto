@@ -8,16 +8,24 @@
         </form>
         <ul>
             <li v-for="(todo, index) in todos" :key="index">
-                {{ todo.text }}
-                <button @click="removeTodo(index)">Remove</button>
+                <div v-if="todo.completed === false">
+                    <span  @click="changeTodo(index, true)">
+                        {{ todo.text }}
+                    </span>
+                    <button @click="removeTodo(index)">Remove</button>
+                </div>
             </li>
         </ul>
         <div>
             <h3>Completed Todos</h3>
             <ul>
                 <li v-for="(todo, index) in completedTodos" :key="index">
-                    {{ todo.text }}
-                    <button @click="removeTodo(index)">Remove</button>
+                    <div v-if="todo.completed === true">
+                        <span @click="changeTodo(index, false)">
+                            {{ todo.text }}
+                        </span>
+                        <button @click="removeTodo(index)">Remove</button>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -35,16 +43,18 @@ export default {
         const newTodo = ref('');
 
         const todos = computed(() => store.state.todos)
-        debugger
         console.log(todos)
 
         const completedTodos = computed(() => store.getters.completedTodos);
-        debugger
         console.log(completedTodos)
 
         const addTodo = async () => {
             await store.dispatch('addTodoAsync', { text: newTodo.value, completed: false });
             newTodo.value = '';
+        }
+
+        const changeTodo = async (index, completed) => {
+            await store.dispatch('changeTodoAsync', { index, completed })
         }
         
         const removeTodo = (index) => {
@@ -56,7 +66,8 @@ export default {
             todos,
             completedTodos,
             addTodo,
-            removeTodo
+            removeTodo,
+            changeTodo
         }
     }
 }
